@@ -1,0 +1,27 @@
+import java.util.ArrayList;
+import java.util.List;
+public class FileRepository implements Repository {
+    private List<Record> records;
+    public FileRepository() {
+        records = new ArrayList<>();
+    }
+    @Override
+    public void addRecord(Record record) {
+        records.add(record)
+    }
+    @Override
+    public void deleteRecord(String recordId) {
+        records.removeIf(record -> record.getId().equals(recordId))
+    }
+    @Override
+    public List<Record> searchRecords(String keyword) {
+        List<Record> foundRecords = new ArrayList<>();
+        for (Record record : records) {
+            if (record.containsKeyword(keyword)) {
+                foundRecords.add(record);
+            }
+        }
+
+        return foundRecords;
+
+    }

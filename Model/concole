@@ -1,0 +1,14 @@
+import java.util.Scanner;
+public class ConsoleView implements View {
+    @Override
+    public void displayRecords(List<Record> records) {
+        for (Record record : records) {
+            System.out.println(record);
+        }
+    }
+    @Override
+    public String getUserInput() {
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
+
+    }

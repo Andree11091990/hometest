@@ -1,0 +1,61 @@
+public class PresenterImpl implements Presenter {
+    private Repository repository;
+    public PresenterImpl(Repository repository) {
+        this.repository = repository;
+    }
+    @Override
+    public void addRecord(String title, String content) {
+        Record record = new Record(title, content);
+        repository.saveRecord(record);
+    }
+
+    @Override
+    public void deleteRecord(int id) {
+        repository.deleteRecord(id);
+    }
+    @Override
+    public void searchRecords(String keyword) {
+        List<Record> foundRecords = repository.searchRecords(keyword);
+    }
+    @Override
+    public void sortRecordsByDate() {
+        List<Record> sortedRecords = repository.sortRecordsByDate();
+    }
+    @Override
+    public void displayAllRecords() {
+        List<Record> allRecords = repository.getAllRecords();
+
+    }
+    rom datetime import datetime
+
+class Record:
+    def __init__(self, id, title, content):
+        self.id = id
+        self.title = title
+        self.content = content
+        self.creation_date = datetime.now()
+        self.last_modified_date = datetime.now()
+    def get_id(self):
+        return self.id
+    def set_title(self, new_title):
+        self.title = new_title
+        self.last_modified_date = datetime.now()
+    def get_title(self):
+        return self.title
+    def set_content(self, new_content):
+        self.content = new_content
+        self.last_modified_date = datetime.now()
+    def get_content(self):
+        return self.content
+    def get_creation_date(self):
+        return self.creation_date
+    def get_last_modified_date(self):
+        return self.last_modified_date
+    def __eq__(self, other):
+        return (isinstance(other, Record) and
+                self.id == other.id and
+                self.title == other.title and
+                self.content == other.content and
+                self.creation_date == other.creation_date and
+                self.last_modified_date == other.last_modified_date)
+}

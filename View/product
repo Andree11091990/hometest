@@ -1,0 +1,40 @@
+public interface NoteBookView {
+    void showAllNotes(List<Note> notes);
+    void showNoteDetails(Note note);
+    void showErrorMessage(String message);
+public class NoteBookConsoleView implements NoteBookView {
+    @Override
+    public void showAllNotes(List<Note> notes) {
+        for (Note note : notes) {
+            System.out.println(note.toString());
+        }
+    }
+    @Override
+    public void showNoteDetails(Note note) {
+        System.out.println(note.toString());
+    }
+    @Override
+    public void showErrorMessage(String message) {
+        System.err.println(message);
+    }
+}
+public class NoteBookController {
+    private NoteBookView view;
+    private NoteBookModel model;
+    public NoteBookController(NoteBookView view, NoteBookModel model) {
+        this.view = view;
+        this.model = model;
+    }
+    public void displayAllNotes() {
+        List<Note> notes = model.getAllNotes();
+        view.showAllNotes(notes);
+    }
+    public void displayNoteDetails(int noteId) {
+        Note note = model.getNoteById(noteId);
+        if (note != null) {
+            view.showNoteDetails(note);
+        } else {
+            view.showErrorMessage("Note not found");
+        }
+    }
+}

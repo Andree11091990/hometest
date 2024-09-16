@@ -1,0 +1,7 @@
+public class Main {
+
+    public static void main(String[] args) {
+        Repository repository = new Repository();
+        View view = new View();
+        Presenter presenter = new Presenter(repository, view);
+        presenter.startApp();

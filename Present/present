@@ -1,0 +1,31 @@
+public class Contact {
+    private String name;
+    private String phoneNumber;
+    public Contact(String name, String phoneNumber) {
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+    }
+
+}
+public class ContactPresenter {
+    private Contact contact;
+    private ContactView contactView;
+    public ContactPresenter(Contact contact, ContactView contactView) {
+        this.contact = contact;
+        this.contactView = contactView;
+    }
+    public void updateView() {
+        contactView.displayContact(contact.getName(), contact.getPhoneNumber());
+    }
+}
+public interface ContactView {
+    void displayContact(String name, String phoneNumber);
+}
+public class Main {
+    public static void main(String[] args) {
+        Contact contact = new Contact("Alice", "123-456-7890");
+        ContactView contactView = new ContactConsoleView();
+        ContactPresenter presenter = new ContactPresenter(contact, contactView);
+        presenter.updateView();
+    }
+}
